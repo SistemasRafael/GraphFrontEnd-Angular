@@ -1,0 +1,26 @@
+.card-content {
+    max-width: 400px;
+}
+
+.card-footer {
+  padding: 16px;
+}
+
+.button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

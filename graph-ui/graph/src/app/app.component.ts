@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'graph';
+  // public badgevisible = false;
+  badgevisibility() {
+    // this.badgevisible = true;
+  }
 }
