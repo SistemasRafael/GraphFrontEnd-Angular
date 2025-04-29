@@ -7,8 +7,14 @@
             <mat-form-field class="full-width">
                 <mat-label>Email</mat-label>
                 <input type="email" [id]="Email_Id" matInput formControlName="email" placeholder="Ex. pat@example.com" [errorStateMatcher]="matcher" required>
-                <mat-error *ngIf="signInform.get('email')!.hasError('email') && !signInform.get('email')!.hasError('required')">Please enter a valid email address</mat-error>
-                <mat-error *ngIf="signInform.get('email')!.hasError('required')">This field is <strong>required</strong></mat-error>
+                @if (signInform.get('email')!.hasError('email') && !signInform.get('email')!.hasError('required')) 
+                {
+                    <mat-error>Please enter a valid email address</mat-error>
+                }
+                @if (signInform.get('email')!.hasError('required'))
+                {
+                    <mat-error>This field is <strong>required</strong></mat-error>
+                }
             </mat-form-field>
             <mat-form-field class="full-width">
                 <mat-label>Password</mat-label>
@@ -21,7 +27,7 @@
     <mat-card-footer class="card-footer">
         <div class="button-row">
             <button mat-stroked-button>Clear</button>
-            <button mat-flat-button>Sign In</button>
+            <button mat-flat-button [id]="SignIn_button_Id" (click)="onSignIn()" [disabled]="">Sign In</button>
         </div>
     </mat-card-footer>
   </mat-card>

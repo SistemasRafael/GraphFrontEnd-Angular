@@ -1,36 +1,57 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { SignInComponent } from './sign-in.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { By } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting, } from '@angular/common/http/testing';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('SignInComponent', () => {
-  let component: SignInComponent;
-  let fixture: ComponentFixture<SignInComponent>;
   const EMAIL_SUCCESS: string  = 'email@test.com';
   const EMAIL_FAILED: string  = 'emailtest.com';
   const PASSWORD_SUCCESS: string  = '123456789';
-  // let valueServiceMock: jasmine.SpyObj<ValueService>;
+
+  let component: SignInComponent;
+  let fixture: ComponentFixture<SignInComponent>;
+
+  let authService: AuthService;
+  let httpTestingController: HttpTestingController;
 
   beforeEach(async () => {
-    // const valueServiceSpy = jasmine.createSpyObj('ValueService', ['getValue']);
-
     await TestBed.configureTestingModule({
-      // providers: [{provide: ValueService, useValue: valueServiceSpy}],
-      declarations: [SignInComponent],
+      declarations: [
+        SignInComponent
+      ],
       imports: [
+        CommonModule,
         MatCardModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
         FormsModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonModule,
+        MatFormFieldModule,
         MatInputModule
-      ]
+      ],
+      providers: [
+        AuthService,
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ],
     })
     .compileComponents();
-
-    // valueServiceMock = TestBed.inject(ValueService) as jasmine.SpyObj<ValueService>;
+    
+    authService = TestBed.inject(AuthService);
+    httpTestingController = TestBed.inject(HttpTestingController);
 
     fixture = TestBed.createComponent(SignInComponent);
     component = fixture.componentInstance;
@@ -39,9 +60,13 @@ describe('SignInComponent', () => {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('')
     });
-
+    
     fixture.detectChanges();
   });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -114,6 +139,31 @@ describe('SignInComponent', () => {
     const matError = fixture.nativeElement.querySelector('mat-error');
     expect(matError).toBeTruthy();
     expect(matError.textContent).toContain('This field is required');
+  });
+
+  it('should send a login request', () => {
+    let elementEmail = fixture.debugElement.query(By.css('#' + component.Email_Id)).nativeElement;
+    elementEmail.value = EMAIL_SUCCESS;
+    elementEmail.dispatchEvent(new Event('input'));
+
+    let elemenetPassword = fixture.debugElement.query(By.css('#' + component.Password_Id)).nativeElement;
+    elemenetPassword.value = PASSWORD_SUCCESS;
+    elemenetPassword.dispatchEvent(new Event('input'));
+
+    const emailControl = component.signInform.get('email');
+    const passwordControl = component.signInform.get('password');
+    emailControl?.markAsTouched();
+    passwordControl?.markAsTouched();
+
+    fixture.detectChanges();
+
+    spyOn(component, 'onSignIn');
+    const element = fixture.debugElement.nativeElement.querySelector("#" + component.SignIn_button_Id);
+    element.click();
+
+    expect(element).toBeTruthy();
+    expect(element.textContent).toContain('Sign In');
+    expect(component.onSignIn).toHaveBeenCalled();
   });
 
 });

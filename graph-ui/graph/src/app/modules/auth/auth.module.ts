@@ -11,6 +11,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from './services/auth.service';
+import { provideHttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -29,6 +31,10 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule
+  ],
+  providers: [
+    provideHttpClient(),
+    AuthService
   ]
 })
 export class AuthModule { }
