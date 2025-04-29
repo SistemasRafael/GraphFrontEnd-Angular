@@ -1,0 +1,16 @@
+{
+    "userId": "2d64c176-43e7-4cac-a2a3-3ef1c1578e43",
+    "name": "Leonardo Rafael",
+    "lastName": "Flores",
+    "age": 1,
+    "rowCreationDateTime": "2025-04-07T22:09:54.067",
+    "rowUpdateDateTime": "2025-04-08T05:10:00.47",
+    "email": "leonardo.rafael@gmail.com",
+    "passwordHash": "AQAAAAIAAYagAAAAEHDeWmyQP9RtFDOrIkEYst/kR2XkBK6r9X3/1n94IaROBAhyOriU8S+AW0sYBIrVbQ==",
+    "refreshToken": "z35C9nxn/0DSmKaWTyI5DTst0Lh794yZrI0h5NH1kuM=",
+    "refreshTokenExpiryTime": "2025-05-05T20:59:06.737",
+    "tokenResponse": {
+      "accessToken": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTGVvbmFyZG8gUmFmYWVsIEZsb3JlcyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMmQ2NGMxNzYtNDNlNy00Y2FjLWEyYTMtM2VmMWMxNTc4ZTQzIiwiZ3JhcGgtc2VydmljZS1hY2Nlc3MiOiJUcnVlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NTEwNzY4MDMsImlzcyI6Imlzc3Vlci1hdXRoLWFwaS1zZXJ2aWNlIiwiYXVkIjoiYXVkaWVuY2UtZ2F0ZXdheS1hcGktc2VydmljZSJ9.txTHXI1_E9fGUD-3SYjagmDsEsiNVNsaOLdFGw0FKMfvkaEbyJzJVriTIbPkzQ011WgdLEr0tE1SKXHmq0-daQ",
+      "refreshToken": "jzqeR/hmwio1+zujS2q7NNkvm/7DSZnSw4pLng2+utk="
+    }
+  }
