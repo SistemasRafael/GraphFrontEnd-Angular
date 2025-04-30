@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AuthRoutingModule } from './auth-routing.module';
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { SignInRoutingModule } from './sign-in-routing.module';
+import { SignInComponent } from './sign-in.component';
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { provideHttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AuthService } from './services/auth.service';
-import { provideHttpClient } from '@angular/common/http';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -21,20 +21,20 @@ import { provideHttpClient } from '@angular/common/http';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule,
+    SignInRoutingModule,
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     provideHttpClient(),
     AuthService
   ]
 })
-export class AuthModule { }
+export class SignInModule { }
