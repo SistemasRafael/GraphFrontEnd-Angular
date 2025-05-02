@@ -4,19 +4,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { PublicComponent } from './layouts/public/public.component';
-import { SignUpComponent } from './modules/auth/pages/sign-up/sign-up.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import { AuthComponent } from './layouts/auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     PublicComponent,
-    SignUpComponent
+    AuthComponent
   ],
   imports: [
     BrowserModule,

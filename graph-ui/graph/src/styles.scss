@@ -15,16 +15,16 @@ html {
   ));
 
   @include mat.toolbar-overrides((
-    container-background-color: orange,
-    container-text-color: red,
+    container-background-color: var(--mat-sys-primary-container),
+    container-text-color: var(--mat-sys-primary),
   ));
 
   @include mat.sidenav-overrides((
-    container-background-color : orange,
-    container-text-color : red,
+    // container-background-color : orange,
+    // container-text-color : red,
     container-shape:0px,
-    container-width: 300px,
-    content-background-color :blue
+    container-width: var(--mat-sidenav-container-width, 360px)
+    // content-background-color :blue
  ));
 }/* You can add global styles to this file, and also import other style files */
 
