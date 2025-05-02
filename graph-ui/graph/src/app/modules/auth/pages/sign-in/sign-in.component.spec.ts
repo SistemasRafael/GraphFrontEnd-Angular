@@ -73,9 +73,8 @@ describe('SignInComponent', () => {
   });
 
   it('title should be "Sign In"', () => {
-    const _nativeElement: HTMLElement = fixture.nativeElement;
-    const titleElement = _nativeElement.querySelector('mat-card-title')!;
-    expect(titleElement.textContent).toEqual('Sign In');
+    const _nativeElement: HTMLElement = fixture.debugElement.query(By.css('#' + component.Title_Id)).nativeElement;
+    expect(_nativeElement.textContent).toEqual('Sign In');
   });
 
   it('email value should be successs', () => {

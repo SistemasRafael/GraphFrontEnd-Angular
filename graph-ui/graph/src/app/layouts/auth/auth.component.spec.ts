@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthComponent } from './auth.component';
+import { RouterModule } from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('AuthComponent', () => {
   let component: AuthComponent;
@@ -8,7 +13,14 @@ describe('AuthComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AuthComponent]
+      declarations: [AuthComponent],
+      imports: [
+        RouterModule.forRoot([]),
+        MatSidenavModule,
+        MatListModule,
+        MatToolbarModule,
+        MatIconModule
+      ],
     })
     .compileComponents();
 
