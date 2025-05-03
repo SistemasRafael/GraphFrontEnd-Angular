@@ -15,7 +15,6 @@ export class AuthService {
   private readonly GATEWAY : string = 'auth-service';
   private readonly CONTROLLER : string = 'Auth';
   private http = inject(HttpClient);
-  // constructor(private http: HttpClient) { }
 
   signIn(email: string, password: string): Observable<User> {
     const body = {

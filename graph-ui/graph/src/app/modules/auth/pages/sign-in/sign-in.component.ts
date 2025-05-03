@@ -43,10 +43,6 @@ export class SignInComponent {
     const email : string = this.signInform.get('email')?.value;
     const password : string = this.signInform.get('password')?.value;
     
-    console.log(this.signInform);
-    console.log(email);
-    console.log(password);
-    
     this.authService.signIn(email, password).subscribe((userData : User) => {
       console.log(userData);
     });

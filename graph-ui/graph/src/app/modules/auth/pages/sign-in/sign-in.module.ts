@@ -6,7 +6,7 @@ import { SignInComponent } from './sign-in.component';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { httpInterceptorServiceInterceptor } from '../../../../core/interceptors/http-interceptor-service.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ],
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpInterceptorServiceInterceptor]),),
     AuthService
   ]
 })
