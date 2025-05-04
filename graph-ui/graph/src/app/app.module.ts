@@ -12,6 +12,12 @@ import {MatListModule} from '@angular/material/list';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DashboardComponent } from './modules/admin/pages/dashboard/dashboard.component';
+import { AuthService } from './shared/services/auth.service';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { AuthGuardCanActivateService } from './shared/services/auth-guard-can-activate.service';
+import { spinnerInterceptor } from './core/interceptors/spinner.interceptor';
+import { httpInterceptor } from './core/interceptors/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,7 +25,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AdminComponent,
     PublicComponent,
     AuthComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +38,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatListModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptors([
+      spinnerInterceptor,
+      httpInterceptor, 
+    ]),),
+    AuthGuardCanActivateService, 
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

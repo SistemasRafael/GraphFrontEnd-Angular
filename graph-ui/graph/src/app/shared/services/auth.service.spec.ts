@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import userDataFaker  from '../../../data/user-data-faker.json';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
+import { provideHttpClient } from '@angular/common/http';
+import userDataFaker  from '../../data/user-data-faker.json';
 
 describe('AuthService', () => {
   const API : string = environment.apiGatewayUrl;

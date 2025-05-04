@@ -1,20 +1,21 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
-import { catchError, map, Observable, of, throwError } from 'rxjs';
-import { User } from '../../../core/models/user.model';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { User } from '../../core/models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  isAuthenticated = false;
-
+  private _isAuth$ = new BehaviorSubject<boolean>(false);
   private readonly API : string = environment.apiGatewayUrl;
   private readonly GATEWAY : string = 'auth-service';
   private readonly CONTROLLER : string = 'Auth';
   private http = inject(HttpClient);
+
+  public isAuthenticated$ = this._isAuth$.asObservable();
 
   signIn(email: string, password: string): Observable<User> {
     const body = {
@@ -28,14 +29,14 @@ export class AuthService {
                     .pipe(
                       catchError(this.errorHandler),
                       map((userResponse : User) => {
-                        this.isAuthenticated = true;
+                        this._isAuth$.next(true);
                         localStorage.setItem('token', userResponse.tokenResponse.accessToken);
                         return userResponse;
                     }));
   }
 
   logout() {
-    this.isAuthenticated = false;
+    this._isAuth$.next(false);
     localStorage.removeItem('token');
   }
 
@@ -57,5 +58,4 @@ export class AuthService {
 
     return throwError(() => error);
   }
-
 }
