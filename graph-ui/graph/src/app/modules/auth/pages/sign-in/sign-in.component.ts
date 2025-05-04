@@ -1,8 +1,8 @@
 import { Component, inject   } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { AuthService } from '../../services/auth.service';
 import { User } from '../../../../core/models/user.model';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -42,10 +42,6 @@ export class SignInComponent {
   onSignIn(): void {
     const email : string = this.signInform.get('email')?.value;
     const password : string = this.signInform.get('password')?.value;
-    
-    console.log(this.signInform);
-    console.log(email);
-    console.log(password);
     
     this.authService.signIn(email, password).subscribe((userData : User) => {
       console.log(userData);

@@ -7,12 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { By } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting, } from '@angular/common/http/testing';
-import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 describe('SignInComponent', () => {
   const EMAIL_SUCCESS: string  = 'email@test.com';
