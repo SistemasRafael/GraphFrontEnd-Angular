@@ -1,5 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, inject, signal } from '@angular/core';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,16 +10,7 @@ import { Component, inject, signal } from '@angular/core';
 })
 export class AdminComponent {
   protected readonly fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
-
-  protected readonly fillerContent = Array.from(
-    {length: 50},
-    () =>
-      `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-       laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-  );
+  private authService = inject(AuthService);
 
   protected readonly isMobile = signal(true);
 
@@ -41,4 +33,8 @@ export class AdminComponent {
   protected readonly shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(
     window.location.host,
   );
+
+  logout(){
+    this.authService.logout();
+  }
 }

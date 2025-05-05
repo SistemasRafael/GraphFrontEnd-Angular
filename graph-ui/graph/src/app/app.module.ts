@@ -18,6 +18,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthGuardCanActivateService } from './shared/services/auth-guard-can-activate.service';
 import { spinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { httpInterceptor } from './core/interceptors/http.interceptor';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule
   ],
   providers: [
     provideHttpClient(withInterceptors([
