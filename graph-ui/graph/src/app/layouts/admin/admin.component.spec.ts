@@ -6,6 +6,9 @@ import { MatListModule } from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -21,7 +24,12 @@ describe('AdminComponent', () => {
         MatSidenavModule,
         MatListModule,
         MatToolbarModule,
-        MatIconModule
+        MatIconModule,
+        MatMenuModule
+      ],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting()
       ],
     })
     .compileComponents();
