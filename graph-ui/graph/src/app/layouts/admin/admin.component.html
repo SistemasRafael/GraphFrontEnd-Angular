@@ -1,14 +1,22 @@
 <div class="example-container" [class.example-is-mobile]="isMobile()">
-    <mat-toolbar class="example-toolbar" color="primary">
+    <mat-toolbar class="example-toolbar">
         <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
         <span>Graph</span>
         <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"><mat-icon>favorite</mat-icon>
-        </button>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"><mat-icon>favorite</mat-icon></button>
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"><mat-icon>share</mat-icon></button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Log Out</span>
+        </button>
+        </mat-menu>
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="isMobile() ? 56 : 0">
-        <mat-sidenav #snav [mode]="isMobile() ? 'over' : 'side'" [fixedInViewport]="isMobile()" fixedTopGap="56">
+        <mat-sidenav #snav [mode]="isMobile() ? 'over' : 'side'" [fixedInViewport]="isMobile()" fixedTopGap="56" class="docs-component-viewer-nav-content">
             <mat-nav-list>
                 @for (nav of fillerNav; track nav) 
                 {
@@ -21,3 +29,4 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
     </div>
+      

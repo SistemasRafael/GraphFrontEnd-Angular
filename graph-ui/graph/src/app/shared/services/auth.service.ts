@@ -3,19 +3,21 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/models/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
+
+const ITEM_TOKEN_NAME : string = 'token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  private _isAuth$ = new BehaviorSubject<boolean>(false);
   private readonly API : string = environment.apiGatewayUrl;
   private readonly GATEWAY : string = 'auth-service';
   private readonly CONTROLLER : string = 'Auth';
   private http = inject(HttpClient);
-
-  public isAuthenticated$ = this._isAuth$.asObservable();
+  private router = inject(Router);
+  private helper = new JwtHelperService();
 
   signIn(email: string, password: string): Observable<User> {
     const body = {
@@ -29,19 +31,31 @@ export class AuthService {
                     .pipe(
                       catchError(this.errorHandler),
                       map((userResponse : User) => {
-                        this._isAuth$.next(true);
-                        localStorage.setItem('token', userResponse.tokenResponse.accessToken);
+                        this.setToken(userResponse.tokenResponse.accessToken);
                         return userResponse;
                     }));
   }
 
-  logout() {
-    this._isAuth$.next(false);
-    localStorage.removeItem('token');
+  getToken(): string | null {
+    return localStorage.getItem(ITEM_TOKEN_NAME);
   }
 
-  getToken() {
-    return localStorage.getItem('token');
+  setToken(token: string): void {
+    localStorage.setItem(ITEM_TOKEN_NAME, token);
+  }
+
+  removeToken(): void {
+    localStorage.removeItem(ITEM_TOKEN_NAME);
+  }
+
+  get isLoggedIn(): boolean {
+    const token = this.getToken();
+    return !this.helper.isTokenExpired(token);
+  }
+
+  logout() {
+    this.removeToken();
+    this.router.navigate(['auth/sing-in']);
   }
 
   private errorHandler(error: HttpErrorResponse) {

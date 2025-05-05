@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { User } from '../../../../core/models/user.model';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { Router } from '@angular/router';
 
-/** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -31,6 +31,7 @@ export class SignInComponent {
   public matcher = new MyErrorStateMatcher();
 
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   constructor() {
     this.signInform = new FormGroup({
@@ -44,7 +45,7 @@ export class SignInComponent {
     const password : string = this.signInform.get('password')?.value;
     
     this.authService.signIn(email, password).subscribe((userData : User) => {
-      console.log(userData);
+      this.router.navigate(['admin/dashboard']);
     });
   }
 }
