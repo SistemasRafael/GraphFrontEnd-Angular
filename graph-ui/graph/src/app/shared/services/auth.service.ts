@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/models/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -27,7 +27,19 @@ export class AuthService {
     
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post<User>(`${this.API}/${this.GATEWAY}/${this.CONTROLLER}/SingIn`, body, { headers: headers })
+    return this.http.post<User>(`${this.API}/${this.GATEWAY}/${this.CONTROLLER}/SignIn`, body, { headers: headers })
+                    .pipe(
+                      catchError(this.errorHandler),
+                      map((userResponse : User) => {
+                        this.setToken(userResponse.tokenResponse.accessToken);
+                        return userResponse;
+                    }));
+  }
+
+  signUp(user: User): Observable<User> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<User>(`${this.API}/${this.GATEWAY}/${this.CONTROLLER}/SignUp`, user, { headers: headers })
                     .pipe(
                       catchError(this.errorHandler),
                       map((userResponse : User) => {
@@ -55,7 +67,7 @@ export class AuthService {
 
   logout() {
     this.removeToken();
-    this.router.navigate(['auth/sing-in']);
+    this.router.navigate(['/auth/sign-in']);
   }
 
   private errorHandler(error: HttpErrorResponse) {

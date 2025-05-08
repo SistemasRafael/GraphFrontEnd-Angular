@@ -45,7 +45,7 @@ export class SignInComponent {
     const password : string = this.signInform.get('password')?.value;
     
     this.authService.signIn(email, password).subscribe((userData : User) => {
-      this.router.navigate(['admin/dashboard']);
+      this.router.navigate(['/admin/dashboard']);
     });
   }
 }

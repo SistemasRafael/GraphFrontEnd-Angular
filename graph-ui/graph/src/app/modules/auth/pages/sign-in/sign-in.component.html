@@ -22,14 +22,14 @@
                 <mat-error>This field is <strong>required</strong></mat-error>
             }
         </mat-form-field>
-        <div class="example-button-row-right ">
+        <div class="button-row-right">
             <a mat-button href="https://www.google.com/" target="_blank">Forgot Password?</a>
         </div>
-        <div class="example-button-row-center">
+        <div class="button-row-center">
             <button mat-raised-button color="primary" [id]="SignIn_button_Id" class="full-width" [disabled]="!signInform.valid">Sign In</button>
         </div>
-        <div class="example-button-row-center">
-            Don't you have an accout? <a mat-button href="https://www.google.com/" target="_blank">Register</a>
+        <div class="button-row-center">
+            Don't you have an accout? <a mat-button [routerLink]="['/auth/sign-up']">Register</a>
         </div>
       </form>
     </mat-card-content>
