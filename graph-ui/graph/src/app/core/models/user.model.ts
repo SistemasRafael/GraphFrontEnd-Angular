@@ -8,6 +8,7 @@ export interface User {
     rowCreationDateTime : Date;
     rowUpdateDateTime : Date;
     email : string;
+    password : string;
     passwordHash : string;
     refreshToken : string;
     refreshTokenExpiryTime : Date;

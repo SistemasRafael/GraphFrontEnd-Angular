@@ -5,6 +5,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { environment } from '../../../environments/environment';
 import { provideHttpClient } from '@angular/common/http';
 import userDataFaker  from '../../data/user-data-faker.json';
+import { User } from '../../core/models/user.model';
 
 describe('AuthService', () => {
   const API : string = environment.apiGatewayUrl;
@@ -34,13 +35,31 @@ describe('AuthService', () => {
   it('signIn request success', () => {
     const signInParametersMock = { email: 'leonardo.rafael@gmail.com', password: 'Welcome@5005' };
 
-    service.signIn(signInParametersMock.email, signInParametersMock.password).subscribe(result => {
+    service.signIn(signInParametersMock.email, signInParametersMock.password).subscribe((result) => {
       expect(result as any).toEqual(userDataFaker);
     });
   
-    const req = httpTestingController.expectOne(`${API}/${GATEWAY}/${CONTROLLER}/SingIn`);
+    const req = httpTestingController.expectOne(`${API}/${GATEWAY}/${CONTROLLER}/SignIn`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(signInParametersMock);
+    req.flush(userDataFaker);
+  });
+
+  it('signUp request success', () => {
+    const signUpParametersMock = {
+          name : "testName",
+          lastName : "lastNametest",
+          email : "test@test.com",
+          password : "password"
+        } as User;
+
+    service.signUp(signUpParametersMock).subscribe(result => {
+      expect(result as any).toEqual(userDataFaker);
+    });
+  
+    const req = httpTestingController.expectOne(`${API}/${GATEWAY}/${CONTROLLER}/SignUp`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(signUpParametersMock);
     req.flush(userDataFaker);
   });
 });

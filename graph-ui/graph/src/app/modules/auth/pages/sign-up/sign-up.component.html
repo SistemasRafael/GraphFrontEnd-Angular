@@ -1,1 +1,76 @@
-<p>sign-up works!</p>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <form [formGroup]="signUpform" (ngSubmit)="onCreate()">
+      <h2 [id]="Title_Id">Sign Up</h2>
+      <div class="flex-container flex-wrap">
+        <div class="flex-row">
+          <div class="flex-container flex-wrap">
+            <mat-form-field class="flex-column" [hintLabel]="'Max ' + nameMaxLength + ' characters'">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" [maxlength]="nameMaxLength" required>
+              <mat-hint align="end">{{ nameControl.value.length }}/{{ nameMaxLength }}</mat-hint>
+              @if (nameControl.hasError('required'))
+              {
+                  <mat-error>This field is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="flex-column" [hintLabel]="'Max ' + lastNameMaxLength + ' characters'">
+              <mat-label>lastName</mat-label>
+              <input matInput formControlName="lastName" [maxlength]="lastNameMaxLength">
+              <mat-hint align="end">{{ lastNameControl.value.length }}/{{ lastNameMaxLength }}</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="flex-row">
+          <div class="flex-container flex-wrap">
+              <mat-form-field class="flex-column">
+                <mat-label>age</mat-label>
+                <input matInput formControlName="age" type="number" placeholder="0" />
+              </mat-form-field>
+              <mat-form-field class="flex-column" [hintLabel]="'Max ' + lastNameMaxLength + ' characters'">
+                <mat-label>email</mat-label>
+                <input matInput [id]="Email_Id" [maxlength]="emailMaxLength" formControlName="email" placeholder="Ex.pat@example.com" name="username" [errorStateMatcher]="matcher" required>
+                <mat-hint align="end">{{ emailControl.value.length }}/{{ emailMaxLength }}</mat-hint>
+                @if (emailControl.hasError('email') && !emailControl.hasError('required')) 
+                {
+                    <mat-error>Please enter a valid email address</mat-error>
+                }
+                @if (emailControl.hasError('required'))
+                {
+                    <mat-error>This field is <strong>required</strong></mat-error>
+                }
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="flex-row">
+          <div class="flex-container flex-wrap">
+              <mat-form-field class="flex-column" [hintLabel]="'Max ' + passwordMaxLength + ' characters'">
+                <mat-label>Password</mat-label>
+                <input matInput [id]="Password_Id" [maxlength]="passwordMaxLength" placeholder="Enter your password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-hint align="end">{{ passwordControl.value.length }}/{{ passwordMaxLength }}</mat-hint>
+                @if (passwordControl.invalid){
+                    <mat-error>{{ this.passwordValidationService.getPasswordError(passwordControl) }}</mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field class="flex-column" [hintLabel]="'Max ' + passwordMaxLength + ' characters'">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput [id]="Confirm_Password_Id" [maxlength]="passwordMaxLength" placeholder="Confirm password" [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" required>
+                <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">{{hideConfirmPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-hint align="end">{{ this.signUpform.get('confirmPassword')?.value.length }}/{{ passwordMaxLength }}</mat-hint>
+                @if (confirmPasswordControl.hasError('required')){
+                    <mat-error>This field is <strong>required</strong></mat-error>
+                }
+                @if (!confirmPasswordControl.hasError('required') && confirmPasswordControl.invalid){
+                  <mat-error>Passwords do not match</mat-error>
+                }
+              </mat-form-field>
+          </div>
+        </div>
+    </div>
+      <div class="button-row-center">
+        <button mat-flat-button class="full-width" [disabled]="!signUpform.valid">Create</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

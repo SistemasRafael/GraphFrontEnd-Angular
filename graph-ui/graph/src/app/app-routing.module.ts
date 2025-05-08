@@ -24,11 +24,11 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'sing-in',
+        path: 'sign-in',
         loadChildren: () => import('./modules/auth/pages/sign-in/sign-in.module').then(m => m.SignInModule)
       },
       {
-        path: 'sing-up',
+        path: 'sign-up',
         loadChildren: () => import('./modules/auth/pages/sign-up/sign-up.module').then(m => m.SignUpModule)
       }
     ]

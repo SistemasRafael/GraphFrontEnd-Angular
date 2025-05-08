@@ -15,10 +15,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { DashboardComponent } from './modules/admin/pages/dashboard/dashboard.component';
 import { AuthService } from './shared/services/auth.service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { AuthGuardCanActivateService } from './shared/services/auth-guard-can-activate.service';
+import { AuthGuardCanActivateService } from './core/guards/auth-guard-can-activate.service';
 import { spinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
+import { PasswordValidationService } from './shared/services/password-validation.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {MatMenuModule} from '@angular/material/menu';
       httpInterceptor, 
     ]),),
     AuthGuardCanActivateService, 
-    AuthService
+    AuthService,
+    PasswordValidationService
   ],
   bootstrap: [AppComponent]
 })

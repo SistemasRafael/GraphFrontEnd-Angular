@@ -13,6 +13,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { RouterModule } from '@angular/router';
+import { SignUpComponent } from '../sign-up/sign-up.component';
 
 describe('SignInComponent', () => {
   const EMAIL_SUCCESS: string  = 'email@test.com';
@@ -40,7 +42,12 @@ describe('SignInComponent', () => {
         MatListModule,
         MatButtonModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        RouterModule.forRoot(
+          [
+            {path: 'auth/sign-up', component: SignUpComponent}
+          ]
+        )
       ],
       providers: [
         AuthService,
