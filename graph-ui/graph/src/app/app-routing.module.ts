@@ -16,6 +16,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./modules/admin/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+      },
+      {
+        path: 'graph',
+        loadChildren: () => import('./modules/admin/pages/cytoscape-app/cytoscape-app.module').then(m => m.CytoscapeAppModule),
       }
     ]
   },

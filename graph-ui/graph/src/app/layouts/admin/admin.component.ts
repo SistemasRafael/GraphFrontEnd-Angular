@@ -9,7 +9,11 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-  protected readonly fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+  protected readonly fillerNav : any[] = [
+    { page : 'Dashboad', url : '/admin/dashboard' },
+    { page : 'graph', url : '/admin/graph' }
+  ];
+
   private authService = inject(AuthService);
 
   protected readonly isMobile = signal(true);

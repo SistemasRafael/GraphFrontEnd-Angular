@@ -20,6 +20,7 @@ import { spinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
 import { PasswordValidationService } from './shared/services/password-validation.service';
+import { CytoscapeAppComponent } from './modules/admin/pages/cytoscape-app/cytoscape-app.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PasswordValidationService } from './shared/services/password-validation
     PublicComponent,
     AuthComponent,
     SpinnerComponent,
-    DashboardComponent
+    DashboardComponent,
+    CytoscapeAppComponent
   ],
   imports: [
     BrowserModule,
