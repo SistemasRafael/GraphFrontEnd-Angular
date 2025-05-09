@@ -43,7 +43,7 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-                "cytoscape-fcose"
+              "cytoscape-fcose"
             ]
           },
           "configurations": {
