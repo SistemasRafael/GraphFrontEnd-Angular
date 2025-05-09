@@ -41,7 +41,10 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+                "cytoscape-fcose"
+            ]
           },
           "configurations": {
             "production": {
