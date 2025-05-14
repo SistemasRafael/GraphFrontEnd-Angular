@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 
 const ITEM_TOKEN_NAME : string = 'token';
+const ITEM_USER_ID : string = 'userId';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,9 @@ export class AuthService {
 
     return this.http.post<User>(`${this.API}/${this.GATEWAY}/${this.CONTROLLER}/SignIn`, body, { headers: headers })
                     .pipe(
-                      catchError(this.errorHandler),
+                      catchError(this.handleResponse),
                       map((userResponse : User) => {
-                        this.setToken(userResponse.tokenResponse.accessToken);
+                        this.createLocalStorageVariables(userResponse);
                         return userResponse;
                     }));
   }
@@ -41,23 +42,45 @@ export class AuthService {
 
     return this.http.post<User>(`${this.API}/${this.GATEWAY}/${this.CONTROLLER}/SignUp`, user, { headers: headers })
                     .pipe(
-                      catchError(this.errorHandler),
+                      catchError(this.handleResponse),
                       map((userResponse : User) => {
-                        this.setToken(userResponse.tokenResponse.accessToken);
+                        this.createLocalStorageVariables(userResponse);
                         return userResponse;
                     }));
+  }
+
+  private removeLocalStorageVariables(){
+    this.removeToken();
+    this.removeUserId();
+  }
+
+  private createLocalStorageVariables(user : User){
+    this.setUserId(user.userId);
+    this.setToken(user.tokenResponse.accessToken);
   }
 
   getToken(): string | null {
     return localStorage.getItem(ITEM_TOKEN_NAME);
   }
 
-  setToken(token: string): void {
+  private setToken(token: string): void {
     localStorage.setItem(ITEM_TOKEN_NAME, token);
   }
 
-  removeToken(): void {
+  getUserId(): string | null {
+    return localStorage.getItem(ITEM_USER_ID);
+  }
+
+  private setUserId(userId: string): void {
+    localStorage.setItem(ITEM_USER_ID, userId);
+  }
+
+  private removeToken(): void {
     localStorage.removeItem(ITEM_TOKEN_NAME);
+  }
+
+  private removeUserId(): void {
+    localStorage.removeItem(ITEM_USER_ID);
   }
 
   get isLoggedIn(): boolean {
@@ -66,22 +89,31 @@ export class AuthService {
   }
 
   logout() {
-    this.removeToken();
+    this.removeLocalStorageVariables();
     this.router.navigate(['/auth/sign-in']);
   }
 
-  private errorHandler(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) 
-    {
-      console.error('An error occurred:', error.error.message);
-    } 
-    else 
-    {
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+  private handleResponse(response : HttpErrorResponse) {
+    if (response.status === 500) {
+      console.log(response.status);
     }
+    console.log(response.status);
 
-    return throwError(() => error);
+    return throwError(() => response);
   }
+
+  // private errorHandler(error: HttpErrorResponse) {
+  //   if (error.error instanceof ErrorEvent) 
+  //   {
+  //     console.error('An error occurred:', error.error.message);
+  //   } 
+  //   else 
+  //   {
+  //     console.error(
+  //       `Backend returned code ${error.status}, ` +
+  //       `body was: ${error.error}`);
+  //   }
+
+  //   return throwError(() => error);
+  // }
 }

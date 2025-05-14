@@ -10,12 +10,12 @@ const gridGuide = require('cytoscape-grid-guide');
 const panzoom = require('cytoscape-panzoom');
 
 @Component({
-  selector: 'app-cytoscape-app',
+  selector: 'app-graph',
   standalone: false,
-  templateUrl: './cytoscape-app.component.html',
-  styleUrl: './cytoscape-app.component.scss'
+  templateUrl: './graph.component.html',
+  styleUrl: './graph.component.scss'
 })
-export class CytoscapeAppComponent implements AfterViewInit {
+export class GraphComponent implements AfterViewInit {
   private readonly nodeRepulsionVal : number = 4500;
   private readonly idealEdgeLengthVal : number = 1;
   private cy : any;
@@ -46,9 +46,17 @@ export class CytoscapeAppComponent implements AfterViewInit {
   }
 
   private cytoscapeUse() {
-    cytoscape.use( gridGuide );
-    cytoscape.use( panzoom );
-    cytoscape.use( fcose );
+    if (typeof cytoscape('core', 'gridGuide') == 'undefined') {
+      cytoscape.use( gridGuide );
+    }
+
+    if (typeof cytoscape('core', 'panzoom') == 'undefined') {
+      cytoscape.use( panzoom );
+    }
+    
+    if (typeof cytoscape('core', 'fcose') == 'undefined') {
+      cytoscape.use( fcose );
+    }
   }
 
   private makeLayout( opts: any ){ 

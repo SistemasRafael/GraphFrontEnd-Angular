@@ -16,7 +16,13 @@
         </mat-menu>
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="isMobile() ? 56 : 0">
-        <mat-sidenav #snav [mode]="isMobile() ? 'over' : 'side'" [fixedInViewport]="isMobile()" fixedTopGap="56" class="docs-component-viewer-nav-content">
+        <mat-sidenav 
+            #snav 
+            [mode]="isMobile() ? 'over' : 'side'" 
+            [fixedInViewport]="isMobile()" 
+            fixedTopGap="56" 
+            [opened] = "isSidenavOpen"
+            class="docs-component-viewer-nav-content">
             <mat-nav-list>
                 @for (nav of fillerNav; track nav) 
                 {
@@ -29,4 +35,3 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
     </div>
-      

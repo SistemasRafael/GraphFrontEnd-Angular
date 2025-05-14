@@ -1,0 +1,60 @@
+  mat-card {
+    max-width: 800px;
+    margin: 2em auto;
+    text-align: center;
+  }
+  
+  mat-form-field {
+    display: block;
+  }
+
+  .button-row-center {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+  
+  .flex-container {
+    display: flex;
+  }
+
+  .flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+  
+  .nowrap  { 
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  
+  .flex-wrap    { 
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }  
+  
+  .wrap-reverse         { 
+    -webkit-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse;
+  }  
+  
+  .flex-column {
+    flex-direction: column;
+    padding: 5px;
+    flex-grow: 1;
+  }
+
+  .flex-row {
+    flex-direction: row;
+    padding: 5px;
+    flex-grow: 1;
+  }
+
+  
