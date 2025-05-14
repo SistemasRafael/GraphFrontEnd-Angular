@@ -19,7 +19,11 @@ const routes: Routes = [
       },
       {
         path: 'graph',
-        loadChildren: () => import('./modules/admin/pages/cytoscape-app/cytoscape-app.module').then(m => m.CytoscapeAppModule),
+        loadChildren: () => import('./modules/admin/pages/graph/graph.module').then(m => m.GraphModule),
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./modules/admin/pages/profile/profile.module').then(m => m.ProfileModule),
       }
     ]
   },

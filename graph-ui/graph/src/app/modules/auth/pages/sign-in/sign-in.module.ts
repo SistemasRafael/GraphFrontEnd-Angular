@@ -35,10 +35,7 @@ import { spinnerInterceptor } from '../../../../core/interceptors/spinner.interc
     MatButtonModule
   ],
   providers: [
-    provideHttpClient(withInterceptors([
-      spinnerInterceptor, 
-      httpInterceptor
-    ]),),
+    provideHttpClient(withInterceptors([spinnerInterceptor])),
     AuthService
   ]
 })

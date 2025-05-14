@@ -12,15 +12,12 @@ import {MatListModule} from '@angular/material/list';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { DashboardComponent } from './modules/admin/pages/dashboard/dashboard.component';
 import { AuthService } from './shared/services/auth.service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthGuardCanActivateService } from './core/guards/auth-guard-can-activate.service';
 import { spinnerInterceptor } from './core/interceptors/spinner.interceptor';
-import { httpInterceptor } from './core/interceptors/http.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
 import { PasswordValidationService } from './shared/services/password-validation.service';
-import { CytoscapeAppComponent } from './modules/admin/pages/cytoscape-app/cytoscape-app.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +25,7 @@ import { CytoscapeAppComponent } from './modules/admin/pages/cytoscape-app/cytos
     AdminComponent,
     PublicComponent,
     AuthComponent,
-    SpinnerComponent,
-    DashboardComponent,
-    CytoscapeAppComponent
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -44,10 +39,7 @@ import { CytoscapeAppComponent } from './modules/admin/pages/cytoscape-app/cytos
     MatMenuModule
   ],
   providers: [
-    provideHttpClient(withInterceptors([
-      spinnerInterceptor,
-      httpInterceptor, 
-    ]),),
+    provideHttpClient(withInterceptors([spinnerInterceptor])),
     AuthGuardCanActivateService, 
     AuthService,
     PasswordValidationService

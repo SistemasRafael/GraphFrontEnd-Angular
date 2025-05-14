@@ -4,7 +4,6 @@ import { SpinnerService } from '../../shared/services/spinner.service';
 import { finalize } from 'rxjs';
 
 export const spinnerInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log("spinnerInterceptor");
   const spinnerService = inject(SpinnerService);
   spinnerService.show();
 

@@ -11,7 +11,8 @@ import { AuthService } from '../../shared/services/auth.service';
 export class AdminComponent {
   protected readonly fillerNav : any[] = [
     { page : 'Dashboad', url : '/admin/dashboard' },
-    { page : 'graph', url : '/admin/graph' }
+    { page : 'graph', url : '/admin/graph' },
+    { page : 'profile', url : '/admin/profile' }
   ];
 
   private authService = inject(AuthService);
@@ -20,6 +21,7 @@ export class AdminComponent {
 
   private readonly _mobileQuery: MediaQueryList;
   private readonly _mobileQueryListener: () => void;
+  isSidenavOpen: boolean = true;
 
   constructor() {
     const media = inject(MediaMatcher);

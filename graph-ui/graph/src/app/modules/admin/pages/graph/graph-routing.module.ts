@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CytoscapeAppComponent } from './cytoscape-app.component';
+import { GraphComponent } from './graph.component';
 import { AuthGuardCanActivateService } from '../../../../core/guards/auth-guard-can-activate.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: CytoscapeAppComponent,
+    component: GraphComponent,
     canActivate:[AuthGuardCanActivateService],
   }
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CytoscapeAppRoutingModule { }
+export class GraphRoutingModule { }
