@@ -47,7 +47,8 @@
               "cytoscape",
               "cytoscape-grid-guide",
               "cytoscape-panzoom",
-              "cytoscape-fcose"
+              "cytoscape-fcose",
+              "cytoscape-edgehandles"
             ]
           },
           "configurations": {
@@ -138,5 +139,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

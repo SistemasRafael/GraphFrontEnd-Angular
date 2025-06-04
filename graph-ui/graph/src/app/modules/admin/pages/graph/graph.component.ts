@@ -8,6 +8,7 @@ const cytoscape = require('cytoscape');
 const fcose = require('cytoscape-fcose');
 const gridGuide = require('cytoscape-grid-guide');
 const panzoom = require('cytoscape-panzoom');
+const edgehandles = require('cytoscape-edgehandles');
 
 @Component({
   selector: 'app-graph',
@@ -16,6 +17,7 @@ const panzoom = require('cytoscape-panzoom');
   styleUrl: './graph.component.scss'
 })
 export class GraphComponent implements AfterViewInit {
+  eh : any;
   private readonly nodeRepulsionVal : number = 4500;
   private readonly idealEdgeLengthVal : number = 1;
   private cy : any;
@@ -27,22 +29,32 @@ export class GraphComponent implements AfterViewInit {
     randomize: false
   };
 
+  reciveFromEmit(checked: boolean) {
+    if(checked) {
+      this.eh.enableDrawMode();
+    }
+    else {
+      this.eh.disableDrawMode();
+    }
+  }
+
   ngAfterViewInit(): void {
     this.cytoscapeUse();
     this.cy = this.cytoscapeSetup();
+    this.eh = this.cy.edgehandles();
     var layout = this.makeLayout({ animate: true });
     layout.run();
   }
 
   private cytoscapeSetup() : any {
     return cytoscape({
-              container: document.getElementById('cy'),
-              style: cyStyles as any,
-              elements: cyData as any,
-              layout: { name: 'grid' }
-            })
-            .gridGuide()
-            .panzoom();
+            container: document.getElementById('cy'),
+            style: cyStyles as any,
+            elements: cyData as any,
+            layout: { name: 'grid' }
+          })
+          .gridGuide()
+          .panzoom();
   }
 
   private cytoscapeUse() {
@@ -56,6 +68,10 @@ export class GraphComponent implements AfterViewInit {
     
     if (typeof cytoscape('core', 'fcose') == 'undefined') {
       cytoscape.use( fcose );
+    }
+
+    if (typeof cytoscape('core', 'edgehandles') == 'undefined') {
+      cytoscape.use( edgehandles );
     }
   }
 
