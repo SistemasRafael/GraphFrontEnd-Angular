@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { ConfigurationSideNavComponent } from './configuration-side-nav.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 describe('ConfigurationSideNavComponent', () => {
   let component: ConfigurationSideNavComponent;
@@ -8,7 +10,13 @@ describe('ConfigurationSideNavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ConfigurationSideNavComponent]
+      declarations: [
+        ConfigurationSideNavComponent
+      ],
+      imports: [
+        MatTabsModule,
+        MatSlideToggleModule
+      ]
     })
     .compileComponents();
 
