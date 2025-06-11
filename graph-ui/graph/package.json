@@ -25,6 +25,7 @@
     "cytoscape-fcose": "^2.2.0",
     "cytoscape-grid-guide": "^2.3.3",
     "cytoscape-panzoom": "^2.5.3",
+    "guid-typescript": "^1.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

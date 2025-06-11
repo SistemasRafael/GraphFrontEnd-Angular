@@ -48,7 +48,8 @@
               "cytoscape-grid-guide",
               "cytoscape-panzoom",
               "cytoscape-fcose",
-              "cytoscape-edgehandles"
+              "cytoscape-edgehandles",
+              "guid-typescript"
             ]
           },
           "configurations": {

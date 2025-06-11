@@ -10,9 +10,15 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 export class ConfigurationSideNavComponent {
   
   @Output() actionDrawEdge = new EventEmitter<boolean>();
+  @Output() actionDrawNode = new EventEmitter<boolean>();
 
-  onToggleChange(event: MatSlideToggleChange) {
+  onDrawEdgeChange(event: MatSlideToggleChange) {
     const checked : boolean = event.checked;
     this.actionDrawEdge.emit(checked);
+  }
+
+  onDrawNodeChange(event: MatSlideToggleChange) {
+    const checked : boolean = event.checked;
+    this.actionDrawNode.emit(checked);
   }
 }
