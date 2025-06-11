@@ -2,6 +2,9 @@
     <div id="cy" class="Graph-Cytoscape">
     </div>
     <div class="Graph-Settings-Side-Var">
-        <app-configuration-side-nav (actionDrawEdge)="reciveFromEmit($event)"></app-configuration-side-nav>
+        <app-configuration-side-nav 
+            (actionDrawEdge)="DrawEdgeEmit($event)"
+            (actionDrawNode)="DrawNodeEmit($event)"
+        ></app-configuration-side-nav>
     </div>
 </div>
