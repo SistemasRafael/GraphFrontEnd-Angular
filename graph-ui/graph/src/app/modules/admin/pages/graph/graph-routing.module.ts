@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: GraphComponent,
-    canActivate:[AuthGuardCanActivateService],
+    // canActivate:[AuthGuardCanActivateService],
   }
 ];
 
